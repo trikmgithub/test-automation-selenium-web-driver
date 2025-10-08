@@ -1,0 +1,53 @@
+# ===========================
+# NetBeans + Selenium + Maven
+# ===========================
+
+# Build folders
+/target/
+/build/
+/out/
+/bin/
+/classes/
+
+# NetBeans specific
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/build/
+nbactions.xml
+nb-configuration.xml
+
+# IntelliJ / Eclipse (nếu mở bằng IDE khác)
+/.idea/
+/.settings/
+*.iml
+.project
+.classpath
+
+# Logs & reports
+*.log
+test-output/
+reports/
+screenshots/
+allure-results/
+allure-report/
+
+# Selenium Drivers
+chromedriver.exe
+geckodriver.exe
+msedgedriver.exe
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temp / backup files
+*.tmp
+*.bak
+*.swp
+
+# Environment / configs
+.env
+*.properties.local
+EOF
