@@ -8,36 +8,157 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.release>24</maven.compiler.release>
-        <exec.mainClass>com.trikmgithub.test.automation.selenium.web.driver.TestAutomationSeleniumWebDriver</exec.mainClass>
+        <exec.mainClass>com.trikmgithub.main.Main</exec.mainClass>
     </properties>
     <dependencies>
+        <!-- Tải trên: https://mvnrepository.com/ -->
+        <!-- 
+            *****
+                Selenium Java
+            *****
+            Đây là thư viện chính của Selenium:
+                - Cho phép bạn điều khiển trình duyệt (ex: Chrome, Firefox, Edge,
+                Safari, ...).
+                - Bao gồm:
+                    + Tìm element (findElement, findElements, ...)
+                    + Thực hiện hành động (click, sendKeys, navigate, ...)
+                    + Quản lý cookies, cửa sổ, tabs
+                    + Giao tiếp với WebDriver (ChromeDriver, GeckoDriver ...)
+            *****
+                WebDriver driver = new ChromeDriver();
+                driver.get("https://example.com");
+                WebElement element = driver.findElement(By.id("username"));
+                element.sendKeys("admin");
+            *****
+
+        -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>4.36.0</version>
         </dependency>
+        
+        <!-- Next -->
+        
+        <!-- 
+            *****
+                WebDriver Manager
+            *****
+                Driver Executables:
+                    - VÌ chrome không hiểu trực tiếp lệnh Java nên Selenium cần 
+                một "trình trung gian" để giao tiếp giao tiếp giữa code Java và trình duyệt thực tế.
+                    - Trình trung gian này được gọi là Driver Executables.
+                    Ex:
+                        Trình duyệt         Driver executable           File
+                        Google Chrome       ChromeDriver                chromedriver.exe
+                        Mozilla Firefox     GeckoDriver                 geckodriver.exe
+                        Microsoft Edge      EdgeDriver                  msedgedriver.exe
+                        Safari              SafariDriver                (tích hợp sẵn trên macOS)
+            *****
+                - Quản lý tự động các driver executables (ChromeDriver, GeckoDriver, EdgeDriver, ...)
+                - Không cần tải thủ công các file .exe hay thêm chúng vào PATH.
+                - Khi chạy code, nó sẽ tự đông:
+                    + Kiểm tra version của trình duyệt cài đặt.
+                    + Tải driver tương ứng.
+                    + Thiết lập cấu hình tự động.
+            *****
+                WebDriverManager.chromedriver().setup();
+                WebDriver driver = new ChromeDriver();
+                
+                Nếu làm thử công sẽ như sau:
+                - Tải thủ công driver executbale phù hợp với trình duyệt (file .exe)
+                - Giải nén và set PATH hoặc chỉ rõ đường dẫn trong code
+                System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
+                WebDriver driver = new ChromeDriver();
+            *****
+        -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.0.3</version>
+            <version>6.3.2</version>
         </dependency>
-        <!-- JUnit for Assertions -->
+        
+        <!-- Next -->
+        
+        <!-- 
+        *****
+            JUnit Jupiter (API & Engine)
+        *****
+            API:
+                - Cung cấp annotation và hàm assertion cho việc viết test case:
+                    Ex: @Test, @BeforeEach, @AfterEach, Assertion.assertEquals(), ...
+        *****
+            @Test
+            void testTitle() {
+                assertEquals("Login Page", "Login Page");
+            }
+        *****
+            Anotation là một loại metadata (siêu dữ liệu) trong Java - nghĩa là
+            các "chú thích" mà bạn gắn lên lớp, phương thức, hoặc biến để báo
+            cho trình biên dịch hoặc framework biết phải làm gì với phần đó.
+                - Cú pháp luôn bắt đầu bằng ký hiệu @
+                - @Test không phải là câu lệnh
+                - Nó không thay đổi logic chương trình (không làm gì trực tiếp
+                trong code java của bạn)
+                - JUnit Engine (phần mềm chạy test) sẽ đọc các annotation này, và
+                dựa vào đó để:
+                    * Biết test nào cần chạy.
+                    * Biết hàm nào chạy trước/sau test.
+                    * Biết test nào cần bị bỏ qua (skip).
+                    * Biết test nào mong đợi lỗi xảy ra.
+        *****
+            Các annotation thường dùng trong JUnit 5 (Jupiter):
+                * @Test - Đánh dấu một phương thức là test case.
+                * @BeforeAll - Chạy một lần duy nhất trước tất cả test (thường
+                dùng để setup global)
+                * @AfterAll - Chạy một lần duy nhất sau tất cả test (thường dùng
+                để dọn dẹp tài nguyên)
+                * @BeforeEach - Chạy trước mỗi test case (setup dữ liệu hoặc mở trình
+                duyệt, ...)
+                * @AfterEach - Chạy sau mỗi test case (đóng trình duyệt, xóa dữ liệu
+                tạm, ...)
+                * @Disabled - Bỏ qua test tạm thời (skip test)
+                * @DisplayName - Đặt tên hiển thị dễ đọc cho test
+                * @Tag - Gắn nhãn cho test để nhóm / lọc khi chạy
+        *****
+            Engine:
+                - Đây là JUnit runtime engine, giúp Maven Surefire Plugin (xanh-đỏ)
+                chạy được các test đã viết bằng junit-jupiter-api
+                - Nói dễ hiểu:
+                    * API là để viết test.
+                    * Engine là để thực thi test.
+        *****
+        -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>6.0.0</version>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>6.0.0</version>
-            <scope>test</scope>
         </dependency>
+        
+        <!-- Next -->
+        
+        <!-- 
+        *****
+            Logback (Logging Framework)
+        *****
+            - Dùng để ghi log (thông báo, cảnh báo, lỗi, debug, ...) trong quá trình
+            chạy test.
+            - Là implementation của SLF4J (Simple Logging Facade for Java).
+            - Giúp bạn dễ dàng kiểm soát và lưu lại log từ test hoặc ứng dụng.
+        *****
+        -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.5.19</version>
         </dependency>
+        
+        <!-- Next -->
+        
     </dependencies>
 </project>
