@@ -3,6 +3,7 @@
  */
 package com.trikmgithub.main;
 
+import com.trikmgithub.practice.DetectingElementState;
 import com.trikmgithub.practice.InteractingWithWebElements;
 import com.trikmgithub.practice.LocatingWebElements;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +37,10 @@ public class Main {
 //        driver.get("https://www.selenium.dev/selenium/web/formPage.html");
 //        LocatingWebElements.findElements(driver);
 
-        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
-        InteractingWithWebElements.interactingWithWebElements(driver);
+//        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
+//        InteractingWithWebElements.interactingWithWebElements(driver);
+
+        driver.get("https://www.selenium.dev/selenium/web/coordinates_tests/page_with_hidden_element.html");
+        DetectingElementState.detectingElementState(driver);
     }
 }
