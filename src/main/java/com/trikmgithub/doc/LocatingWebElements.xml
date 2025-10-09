@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+
+<root>
+    <title>2. Locating Web Elements</title>
+    <!--
+        ***** Locator strategies *****
+        Document Object Model (DOM)
+            * Defines how to access and manipulate the structure of HTML
+        Locator
+            * ID
+            * Name
+            * Class name
+            * Tag name
+            * Link text
+            * Css selector
+            * XPath
+        Choosing the right locator
+            1. Use id whenever possible
+                <input type="text" id="username" placeholder="Enter username">
+                WebElement userField = driver.findElement(By.id("username"));
+                userField.sendKeys("admin");
+                👉 Nên dùng id đầu tiên nếu có, vì trình duyệt tối ưu hóa tìm kiếm theo ID.
+            2. Use name when no id
+                <input type="password" name="password">
+                WebElement passField = driver.findElement(By.name("password"));
+                passField.sendKeys("123456");
+                ⚠️ Dùng khi id không tồn tại.
+                Nếu có nhiều phần tử cùng name, Selenium sẽ chọn phần tử đầu tiên.
+            3. Use class when no id or name
+                <button class="login-btn primary">Login</button>
+                WebElement loginButton = driver.findElement(By.className("login-btn"));
+                loginButton.click();
+                ⚠️ By.className chỉ nhận một class duy nhất — nếu trong HTML có "login-btn primary", 
+                bạn chỉ dùng được một (login-btn hoặc primary), không phải cả chuỗi.
+            4. Use Css selector and/or Xpath for advanced locators
+                <div class="form">
+                    <input type="email" placeholder="Email address">
+                </div>
+                WebElement emailField = driver.findElement(By.cssSelector("div.form input[type='email']"));
+                emailField.sendKeys("test@gmail.com");
+                
+                <button type="submit">Login</button>
+                WebElement loginBtn = driver.findElement(By.xpath("//button[text()='Login']"));
+                loginBtn.click();
+                
+                💡 Dùng CSS và XPath khi phần tử không có thuộc tính rõ ràng, 
+                hoặc cần xác định vị trí dựa vào quan hệ cha-con, text, hoặc index.
+            5. Use tag name to locate multiple elements
+                <ul>
+                    <li>Home</li>
+                    <li>About</li>
+                    <li>Contact</li>
+                </ul>
+                List<WebElement> items = driver.findElements(By.tagName("li"));
+                for (WebElement item : items) {
+                    System.out.println(item.getText());
+                }
+                
+                👉 Trả về danh sách (List<WebElement>), không phải chỉ một phần tử.
+            6. Use link text for anchor elements with no other attributes.
+                <a href="/logout">Logout</a>
+                WebElement logoutLink = driver.findElement(By.linkText("Logout"));
+                logoutLink.click();
+                
+                💡 Ngoài ra, có thể dùng By.partialLinkText("Log") nếu chỉ nhớ một phần của text.
+
+        ***** Relative locator *****
+        Relative locator: near, above, left, below, right
+        Chú ý: nó có thể sẽ không đúng khi responve: web, mobile
+    -->
+</root>
+
