@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+
+<root>
+    <!-- 
+    ***** Wait Strategies *****
+        Implicit waits
+            Use to control wait time for all interactions
+        Explicit waits
+            Use to control wait time for specific interactions
+        =>>Do not mix wait strategies: Implicit waits OR Explicit waits
+            
+        Explicit waits
+            Applied only to certain elements based on their specific conditions
+        Fluent waits
+            Applied to specific elements but with custom configurations
+    ->
+</root>
+
